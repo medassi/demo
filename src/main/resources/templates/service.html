@@ -6,8 +6,15 @@
 </head>
 
 <body>
-    <h1>Affichage d'un service</h1>
-    <p th:text="${service.nom}"></p>
+    <h1>Affichage des services</h1>
+    <ul>
+        <li th:each="s : ${services}" >
+            <div>
+                <p th:text="${s.getId()}"></p>
+                <p th:text="${s.getNom()}"></p>
+            </div>
+        </li>
+    </ul>
 </body>
 
 </html>

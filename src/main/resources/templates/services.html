@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ordinateur Form</title>
+</head>
+
+<body>
+    <h1>Affichage des services</h1>
+    <ul>
+        <li th:each="s : ${services}" >
+            <div>
+                <p th:text="${s.getId()}"></p>
+                <p th:text="${s.getNom()}"></p>
+            </div>>
+            
+        </li>
+    </ul>
+</body>
+
+</html>

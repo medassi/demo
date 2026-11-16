@@ -26,4 +26,22 @@ public abstract class Equipement {
     @JoinColumn (name = "service")
     private Service serviceAffectation;
 
+    public Long getId() {
+        return id;
+    } 
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getNumSerie() {
+        return numSerie;
+    }
+    public Double getPrix() {
+        return prix;
+    }
+    public Service getServiceAffectation() {
+        return serviceAffectation;
+    }
+
 }

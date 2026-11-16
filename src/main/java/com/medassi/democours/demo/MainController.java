@@ -1,5 +1,7 @@
 package com.medassi.democours.demo;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,20 +24,23 @@ public class MainController {
         this.serviceRepository = serviceRepository; 
     }
 
-    @GetMapping("/service")
+    @GetMapping("/services")
     public String getServices(Model model) {
-        Service service = serviceRepository.findAll().get(0);
-        model.addAttribute("service", service);
-        return "service" ;
+        List<Service> services = serviceRepository.findAll();
+        model.addAttribute("services", services);
+        return "services" ;
+    }
+    
+    @GetMapping("/equipements")
+    public String getEquipements(Model model) {
+        List<Equipement> equipements = equipementRepository.findAll();
+        model.addAttribute("equipements", equipements);
+        return "equipements" ;
     }
     
 
   
-    @GetMapping("/test")
-    public String test(Model model) {
-        model.addAttribute("ordinateur", equipementRepository.findAll().get(0)); 
-        return "ordinateur";
-    }
+    
     
     
 }

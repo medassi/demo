@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ordinateur Form</title>
+</head>
+
+<body>
+    <h1>Affichage des equipements</h1>
+    <ul>
+        <li th:each="e : ${equipements}" >
+            <div>
+                <p th:text="${e.getId()}"></p>
+                <p th:text="${e.getNom()}"></p>
+                <p th:text="${e.getNumSerie()}"></p>
+                <p th:text="${e.getPrix()}"></p>
+                <p th:text="${e.getServiceAffectation().getNom()}"></p>
+                <p th:if="${e instanceof T(com.medassi.democours.demo.Ordinateur)}" th:text="'Processeur: ' + ${e.getProcesseur()}"></p>
+                <p th:if="${e instanceof T(com.medassi.democours.demo.Ordinateur)}" th:text="'RAM: ' + ${e.getRamGo()} + ' Go'"></p>
+                <p th:if="${e instanceof T(com.medassi.democours.demo.Ordinateur)}" th:text="'Type PC: ' + ${e.getTypePc()}"></p>
+                <p th:if="${e instanceof T(com.medassi.democours.demo.Imprimante)}" th:text="'Est couleur: ' + ${e.isCouleur()}"></p>
+            </div>
+        </li>
+    </ul>
+</body>
+
+</html>

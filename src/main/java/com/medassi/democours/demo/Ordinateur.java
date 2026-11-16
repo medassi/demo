@@ -23,6 +23,17 @@ public class Ordinateur extends Equipement {
         this.typePc = typePc;
     }
 
+    public String getProcesseur() {
+        return processeur;
+    }
+    public Integer getRamGo() {
+        return ramGo;
+    }
+    public TypePc getTypePc() {
+        return typePc;
+    }
+    
+
     @Override
     public String toString() {
         return "Ordinateur [id=" + super.id + ", nom=" + super.nom + ", numSerie=" + super.numSerie + ", prix="
