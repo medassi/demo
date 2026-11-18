@@ -1,16 +1,19 @@
 package com.medassi.democours.demo;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public class UtilisateurService implements UserDetailsService {
-    @Autowired
+    
     private UtilisateurRepository utilisateurRepository;
+
+    public UtilisateurService(UtilisateurRepository utilisateurRepository) {
+        this.utilisateurRepository = utilisateurRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String pseudo) throws UsernameNotFoundException {
