@@ -37,6 +37,12 @@ public class MainController {
         model.addAttribute("equipements", equipements);
         return "equipements" ;
     }
+
+    @GetMapping("/")
+    public String bonjour() {
+        return "bonjour";
+    }
+    
     
 
   

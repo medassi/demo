@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonjour ! — Bienvenue</title>
+    <!-- Importation de Tailwind CSS pour un design moderne et réactif -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Importation de la police Google Fonts 'Inter' et 'Playfair Display' pour une touche élégante -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(8px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body id="app-body" class="min-h-screen flex items-center justify-center p-4 sm:p-6 transition-colors duration-700 ease-in-out bg-gradient-to-br from-amber-50 via-orange-50 to-rose-100 text-stone-800 selection:bg-orange-200">
+
+    <!-- Éléments décoratifs d'arrière-plan (cercles floutés chaleureux) -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div id="blob-1" class="absolute -top-24 -left-24 w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-orange-200/50 blur-3xl transition-colors duration-700 animate-float"></div>
+        <div id="blob-2" class="absolute -bottom-24 -right-24 w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-rose-200/50 blur-3xl transition-colors duration-700 animate-float" style="animation-delay: 3s;"></div>
+    </div>
+
+    <!-- Carte principale centrée -->
+    <main id="main-card" class="relative z-10 w-full max-w-lg bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl shadow-orange-900/5 border border-white/60 p-8 sm:p-12 text-center transition-all duration-500">
+        
+        <!-- Badge d'ambiance / Heure locale dynamique -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-100/80 text-orange-800 text-xs sm:text-sm font-medium mb-8 transition-colors duration-500" id="time-badge">
+            <span id="weather-icon" class="text-base">☀️</span>
+            <span id="time-greeting">Belle journée à vous</span>
+        </div>
+
+        <!-- Zone d'affichage de la salutation principale -->
+        <div class="min-h-[140px] sm:min-h-[160px] flex flex-col items-center justify-center mb-6">
+            <h1 id="greeting-title" class="font-serif text-5xl sm:text-6xl font-bold tracking-tight text-stone-900 mb-3 transition-all duration-300">
+                Bonjour !
+            </h1>
+            <p id="greeting-subtitle" class="text-stone-500 text-base sm:text-lg font-normal max-w-md mx-auto transition-all duration-300">
+                Ravi de vous accueillir ici. Prenez un instant pour respirer et profiter de ce moment.
+            </p>
+            <span id="greeting-lang" class="mt-3 text-xs uppercase tracking-widest text-stone-400 font-semibold">
+                Français
+            </span>
+        </div>
+
+        <!-- Boutons d'action interactifs -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-8">
+            <!-- Bouton pour changer la salutation -->
+            <button id="btn-greeting" type="button" class="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white font-medium shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                </svg>
+                <span>Autre salutation</span>
+            </button>
+
+            <!-- Bouton pour changer le thème de couleur -->
+            <button id="btn-theme" type="button" class="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-stone-100 hover:bg-stone-200/80 text-stone-700 font-medium border border-stone-200/60 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-orange-500" id="theme-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                </svg>
+                <span>Changer l'ambiance</span>
+            </button>
+        </div>
+
+        <!-- Indicateurs de thèmes (pastilles cliquables) -->
+        <div class="mt-8 pt-6 border-t border-stone-200/60 flex items-center justify-between text-xs text-stone-400">
+            <span>Ambiance : <strong id="theme-name" class="text-stone-600 font-medium">Aurore Chaleureuse</strong></span>
+            <div class="flex items-center gap-2" id="theme-dots">
+                <!-- Généré dynamiquement via JS -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Logique interactive -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Base de données des salutations multilingues et chaleureuses
+            const greetings = [
+                {
+                    title: "Bonjour !",
+                    subtitle: "Ravi de vous accueillir ici. Prenez un instant pour respirer et profiter de ce moment.",
+                    lang: "Français"
+                },
+                {
+                    title: "Hello !",
+                    subtitle: "Wishing you a wonderful day filled with inspiration and positive energy.",
+                    lang: "Anglais"
+                },
+                {
+                    title: "¡Hola!",
+                    subtitle: "Qué alegría verte por aquí. Espero que tengas un día absolutamente fantástico.",
+                    lang: "Espagnol"
+                },
+                {
+                    title: "Buongiorno !",
+                    subtitle: "Benvenuto! Che questa giornata ti porti tanta serenità e piccoli momenti di gioia.",
+                    lang: "Italien"
+                },
+                {
+                    title: "Konnichiwa !",
+                    subtitle: "こんにちは — Que la paix et l'harmonie accompagnent chacun de vos pas aujourd'hui.",
+                    lang: "Japonais"
+                },
+                {
+                    title: "Olá !",
+                    subtitle: "Seja muito bem-vindo! Que o seu dia seja iluminado e repleto de boas surpresas.",
+                    lang: "Portugais"
+                },
+                {
+                    title: "Bienvenue !",
+                    subtitle: "Installez-vous confortablement, cet espace a été pensé pour vous apporter douceur et clarté.",
+                    lang: "Accueil chaleureux"
+                }
+            ];
+
+            // 2. Définition des thèmes visuels (palettes harmonieuses)
+            const themes = [
+                {
+                    name: "Aurore Chaleureuse",
+                    dotColor: "bg-orange-400",
+                    bodyBg: "from-amber-50 via-orange-50 to-rose-100 text-stone-800",
+                    blob1: "bg-orange-200/50",
+                    blob2: "bg-rose-200/50",
+                    card: "bg-white/80 border-white/60 shadow-orange-900/5",
+                    title: "text-stone-900",
+                    subtitle: "text-stone-500",
+                    badge: "bg-orange-100/80 text-orange-800",
+                    btnPrimary: "from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 shadow-orange-500/25",
+                    btnSecondary: "bg-stone-100 hover:bg-stone-200/80 text-stone-700 border-stone-200/60",
+                    iconColor: "text-orange-500"
+                },
+                {
+                    name: "Brise Sereine",
+                    dotColor: "bg-teal-500",
+                    bodyBg: "from-emerald-50 via-teal-50 to-cyan-100 text-slate-800",
+                    blob1: "bg-teal-200/50",
+                    blob2: "bg-emerald-200/50",
+                    card: "bg-white/80 border-white/60 shadow-teal-900/5",
+                    title: "text-slate-900",
+                    subtitle: "text-slate-500",
+                    badge: "bg-teal-100/80 text-teal-800",
+                    btnPrimary: "from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 shadow-teal-500/25",
+                    btnSecondary: "bg-slate-100 hover:bg-slate-200/80 text-slate-700 border-slate-200/60",
+                    iconColor: "text-teal-500"
+                },
+                {
+                    name: "Lavande Douce",
+                    dotColor: "bg-indigo-500",
+                    bodyBg: "from-indigo-50 via-purple-50 to-pink-100 text-slate-800",
+                    blob1: "bg-purple-200/50",
+                    blob2: "bg-indigo-200/50",
+                    card: "bg-white/80 border-white/60 shadow-indigo-900/5",
+                    title: "text-slate-900",
+                    subtitle: "text-slate-500",
+                    badge: "bg-indigo-100/80 text-indigo-800",
+                    btnPrimary: "from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 shadow-indigo-500/25",
+                    btnSecondary: "bg-slate-100 hover:bg-slate-200/80 text-slate-700 border-slate-200/60",
+                    iconColor: "text-indigo-500"
+                },
+                {
+                    name: "Nuit Étoilée",
+                    dotColor: "bg-slate-800",
+                    bodyBg: "from-slate-900 via-indigo-950 to-slate-900 text-slate-100",
+                    blob1: "bg-indigo-500/20",
+                    blob2: "bg-amber-500/15",
+                    card: "bg-slate-800/75 border-slate-700/60 shadow-black/40",
+                    title: "text-white",
+                    subtitle: "text-slate-300",
+                    badge: "bg-indigo-500/20 text-indigo-200",
+                    btnPrimary: "from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 shadow-amber-500/20 text-slate-950 font-semibold",
+                    btnSecondary: "bg-slate-700/70 hover:bg-slate-700 text-slate-200 border-slate-600/60",
+                    iconColor: "text-amber-400"
+                }
+            ];
+
+            // Variables d'état
+            let currentGreetingIndex = 0;
+            let currentThemeIndex = 0;
+
+            // Références aux éléments du DOM
+            const appBody = document.getElementById('app-body');
+            const blob1 = document.getElementById('blob-1');
+            const blob2 = document.getElementById('blob-2');
+            const mainCard = document.getElementById('main-card');
+            const timeBadge = document.getElementById('time-badge');
+            const weatherIcon = document.getElementById('weather-icon');
+            const timeGreeting = document.getElementById('time-greeting');
+            const greetingTitle = document.getElementById('greeting-title');
+            const greetingSubtitle = document.getElementById('greeting-subtitle');
+            const greetingLang = document.getElementById('greeting-lang');
+            const btnGreeting = document.getElementById('btn-greeting');
+            const btnTheme = document.getElementById('btn-theme');
+            const themeIcon = document.getElementById('theme-icon');
+            const themeName = document.getElementById('theme-name');
+            const themeDotsContainer = document.getElementById('theme-dots');
+
+            // 3. Adaptation du petit message en haut selon l'heure réelle de l'utilisateur
+            function updateTimeContext() {
+                const hour = new Date().getHours();
+                if (hour >= 5 && hour < 12) {
+                    weatherIcon.textContent = "🌅";
+                    timeGreeting.textContent = "Douce matinée à vous";
+                } else if (hour >= 12 && hour < 18) {
+                    weatherIcon.textContent = "☀️";
+                    timeGreeting.textContent = "Bel après-midi à vous";
+                } else if (hour >= 18 && hour < 22) {
+                    weatherIcon.textContent = "🌇";
+                    timeGreeting.textContent = "Excellente soirée à vous";
+                } else {
+                    weatherIcon.textContent = "🌙";
+                    timeGreeting.textContent = "Douce nuit étoilée";
+                }
+            }
+
+            // 4. Fonction pour changer la salutation avec une transition fluide
+            function changeGreeting() {
+                currentGreetingIndex = (currentGreetingIndex + 1) % greetings.length;
+                const nextGreeting = greetings[currentGreetingIndex];
+
+                // Animation de sortie légère
+                greetingTitle.style.opacity = '0';
+                greetingTitle.style.transform = 'translateY(-6px)';
+                greetingSubtitle.style.opacity = '0';
+                greetingLang.style.opacity = '0';
+
+                setTimeout(() => {
+                    greetingTitle.textContent = nextGreeting.title;
+                    greetingSubtitle.textContent = nextGreeting.subtitle;
+                    greetingLang.textContent = nextGreeting.lang;
+
+                    // Animation d'entrée
+                    greetingTitle.style.opacity = '1';
+                    greetingTitle.style.transform = 'translateY(0)';
+                    greetingSubtitle.style.opacity = '1';
+                    greetingLang.style.opacity = '1';
+                }, 200);
+            }
+
+            // 5. Fonction pour appliquer un thème de couleur
+            function applyTheme(index) {
+                currentThemeIndex = index;
+                const theme = themes[currentThemeIndex];
+
+                appBody.className = `min-h-screen flex items-center justify-center p-4 sm:p-6 transition-colors duration-700 ease-in-out bg-gradient-to-br ${theme.bodyBg}`;
+                blob1.className = `absolute -top-24 -left-24 w-72 h-72 sm:w-96 sm:h-96 rounded-full ${theme.blob1} blur-3xl transition-colors duration-700 animate-float`;
+                blob2.className = `absolute -bottom-24 -right-24 w-72 h-72 sm:w-96 sm:h-96 rounded-full ${theme.blob2} blur-3xl transition-colors duration-700 animate-float`;
+                mainCard.className = `relative z-10 w-full max-w-lg backdrop-blur-xl rounded-3xl shadow-xl border p-8 sm:p-12 text-center transition-all duration-500 ${theme.card}`;
+                
+                greetingTitle.className = `font-serif text-5xl sm:text-6xl font-bold tracking-tight mb-3 transition-all duration-300 ${theme.title}`;
+                greetingSubtitle.className = `text-base sm:text-lg font-normal max-w-md mx-auto transition-all duration-300 ${theme.subtitle}`;
+                timeBadge.className = `inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium mb-8 transition-colors duration-500 ${theme.badge}`;
+                
+                btnGreeting.className = `w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-gradient-to-r text-white font-medium shadow-lg active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer ${theme.btnPrimary}`;
+                btnTheme.className = `w-full sm:w-auto px-6 py-3.5 rounded-2xl font-medium border active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer ${theme.btnSecondary}`;
+                themeIcon.className = `h-5 w-5 transition-colors duration-300 ${theme.iconColor}`;
+
+                themeName.textContent = theme.name;
+                themeName.className = index === 3 ? "text-slate-200 font-medium" : "text-stone-600 font-medium";
+
+                renderThemeDots();
+            }
+
+            // 6. Génération des pastilles de sélection rapide de thème
+            function renderThemeDots() {
+                themeDotsContainer.innerHTML = '';
+                themes.forEach((theme, idx) => {
+                    const dot = document.createElement('button');
+                    dot.type = 'button';
+                    dot.setAttribute('aria-label', `Thème ${theme.name}`);
+                    dot.title = theme.name;
+                    const isActive = idx === currentThemeIndex;
+                    dot.className = `w-4 h-4 rounded-full transition-all duration-300 cursor-pointer ${theme.dotColor} ${isActive ? 'ring-2 ring-offset-2 ring-stone-400 scale-110' : 'opacity-60 hover:opacity-100'}`;
+                    dot.addEventListener('click', () => applyTheme(idx));
+                    themeDotsContainer.appendChild(dot);
+                });
+            }
+
+            // Écouteurs d'événements
+            btnGreeting.addEventListener('click', changeGreeting);
+            btnTheme.addEventListener('click', () => {
+                const nextIndex = (currentThemeIndex + 1) % themes.length;
+                applyTheme(nextIndex);
+            });
+
+            // Initialisation au chargement
+            updateTimeContext();
+            renderThemeDots();
+        });
+    </script>
+</body>
+</html>
